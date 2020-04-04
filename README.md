@@ -73,7 +73,13 @@ cd server
 sequelize db:migrate
 ```
 
-5. Rename .env.template to .env for custom environment variables. Default port is 5000 and default environment is development.
+5. Create a new file .env.
+
+```bash
+touch .env
+```
+
+Copy all the contents from .env.template into .env. Then add all the values. Default port is 5000 and default environment is development.
 
 ### Setup client side
 
@@ -85,7 +91,13 @@ cd client
 npm install
 ```
 
-7. Rename .env.template to .env and setup environment variables.
+7. Create a new file .env.
+
+```bash
+touch .env
+```
+
+Copy all the contents from .env.template into .env. Then add all the values.
 
 8. Go back to root directory and run the following:
 
