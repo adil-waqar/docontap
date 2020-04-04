@@ -100,7 +100,7 @@ Please make sure to update tests as appropriate.
 - **Fatima Rahman** - [fatimaafridi](https://github.com/fatimaafridi)
 - **Adil Waqar** - [adil-waqar](https://github.com/adil-waqar)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/adil-waqar/docontap/contributors) who participated in this project.
 
 ## License
 
