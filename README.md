@@ -12,6 +12,8 @@ Following are prerequisites to be installed:
 
 ## Quick Start
 
+### Setup server side
+
 1. Install server dependencies by running the following in the root directory
 
 ```bash
@@ -41,8 +43,8 @@ Defaults are as follows:
 
 ```js
   "development": {
-    "username": "root",
-    "password": "root",
+    "username": "postgres",
+    "password": "postgres",
     "database": "doc_on_tap",
     "host": "127.0.0.1",
     "dialect": "postgresql",
@@ -71,7 +73,11 @@ cd server
 sequelize db:migrate
 ```
 
-5. Install client dependencies by:
+5. Rename .env.template to .env for custom environment variables. Default port is 5000 and default environment is development.
+
+### Setup client side
+
+6. Install client dependencies by:
 
 ```bash
 cd ..
@@ -79,7 +85,9 @@ cd client
 npm install
 ```
 
-6. Go back to root directory and run the following:
+7. Rename .env.template to .env and setup environment variables.
+
+8. Go back to root directory and run the following:
 
 ```bash
 cd ..
