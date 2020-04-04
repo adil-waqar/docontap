@@ -1,26 +1,26 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
+    "username": "postgres",
+    "password": "postgres",
     "database": "doc_on_tap",
     "host": "127.0.0.1",
     "dialect": "postgresql",
     "logging": false
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "doc_on_tap",
     "host": "127.0.0.1",
     "dialect": "postgresql",
-    "operatorsAliases": false
+    "logging": false
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "doc_on_tap",
     "host": "127.0.0.1",
     "dialect": "postgresql",
-    "operatorsAliases": false
+    "logging": false
   }
 }

@@ -1,6 +1,6 @@
 const settings = {
-  'app-id': 'a491972e',
-  'app-key': 'd7010e8853ffb09eaae45e4dcb166fb8'
+  'app-id': process.env.REACT_APP_INFERMEDICA_APP_ID,
+  'app-key': process.env.REACT_APP_INFERMEDICA_APP_KEY,
 };
 
 export default settings;

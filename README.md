@@ -18,10 +18,10 @@ Following are prerequisites to be installed:
 npm install
 ```
 
-2. Install Sequelize CLI to run migrations:
+2. Install Sequelize CLI globally to run migrations:
 
 ```bash
-npm install --save-dev sequelize-cli
+npm install --save-dev -g sequelize-cli
 ```
 
 3. Set-up database configs in /server/config/config.json (Development):
