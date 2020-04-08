@@ -25,7 +25,7 @@ export class Question extends Component {
 
     let symptoms = this.props.patient.symptoms;
     res.evidence = _.map(symptoms, (symptom, symptomId) => {
-      const getChoiceId = choice => {
+      const getChoiceId = (choice) => {
         if (choice === true) {
           return 'present';
         }
@@ -59,7 +59,7 @@ export class Question extends Component {
     return res;
   }
 
-  makeGroup = selected => {
+  makeGroup = (selected) => {
     let group = {};
     if (typeof selected === 'object') {
       for (let key in selected) {
@@ -71,14 +71,14 @@ export class Question extends Component {
     return group;
   };
 
-  handleNextQuestion = async prevSelected => {
+  handleNextQuestion = async (prevSelected) => {
     // Clearing the current question
     this.setState({ currentQuestion: null });
     // Dispatch evidence
     const group = this.makeGroup(prevSelected);
     await this.props.onFinish(group);
     // Make the next call
-    this.context.api.diagnosis(this.toDiagnosis()).then(response => {
+    this.context.api.diagnosis(this.toDiagnosis()).then((response) => {
       // Check stop condition
       if (response['should_stop'] === true) {
         document.getElementById('next-step').removeAttribute('disabled');
@@ -94,7 +94,7 @@ export class Question extends Component {
   componentDidMount() {
     // Disable the next button
     document.getElementById('next-step').setAttribute('disabled', 'true');
-    this.context.api.diagnosis(this.toDiagnosis()).then(response => {
+    this.context.api.diagnosis(this.toDiagnosis()).then((response) => {
       this.setState({
         currentQuestion: response
       });
@@ -149,15 +149,16 @@ export class Question extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    patient: state.patient
+    patient: state.assessment
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onFinish: evidence => dispatch({ type: actionTypes.SET_EVIDENCE, evidence })
+    onFinish: (evidence) =>
+      dispatch({ type: actionTypes.SET_EVIDENCE, evidence })
   };
 };
 

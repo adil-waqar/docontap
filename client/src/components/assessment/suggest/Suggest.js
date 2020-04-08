@@ -18,13 +18,13 @@ export class Suggest extends Component {
     return {
       sex: this.props.sex,
       age: this.props.age,
-      selected: _.filter(_.keys(this.props.symptoms), key => {
+      selected: _.filter(_.keys(this.props.symptoms), (key) => {
         return this.props.symptoms[key].reported === true;
       })
     };
   };
 
-  checkBoxHandler = id => {
+  checkBoxHandler = (id) => {
     const checkSymptoms = { ...this.state.checked };
     for (let symptom in checkSymptoms) {
       if (symptom === id) checkSymptoms[symptom] = !checkSymptoms[symptom];
@@ -33,7 +33,7 @@ export class Suggest extends Component {
   };
 
   componentDidMount() {
-    this.context.api.getSuggestedSymptoms(this.toSuggest()).then(response => {
+    this.context.api.getSuggestedSymptoms(this.toSuggest()).then((response) => {
       if (response.length <= 0) {
         document.getElementById('next-step').click();
         return;
@@ -43,8 +43,8 @@ export class Suggest extends Component {
         suggestedSymptoms: response
       });
 
-      this.state.suggestedSymptoms.forEach(symptom => {
-        this.setState(prevState => {
+      this.state.suggestedSymptoms.forEach((symptom) => {
+        this.setState((prevState) => {
           return {
             checked: {
               ...prevState.checked,
@@ -74,7 +74,7 @@ export class Suggest extends Component {
     let data = null;
 
     if (this.state.suggestedSymptoms) {
-      data = _.take(this.state.suggestedSymptoms, 5).map(symptom => {
+      data = _.take(this.state.suggestedSymptoms, 5).map((symptom) => {
         return (
           <FormCheckbox
             key={symptom.id}
@@ -98,16 +98,16 @@ export class Suggest extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    sex: state.patient.sex,
-    age: state.patient.age,
-    symptoms: state.patient.symptoms
+    sex: state.assessment.sex,
+    age: state.assessment.age,
+    symptoms: state.assessment.symptoms
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onFinish: suggestions => {
+    onFinish: (suggestions) => {
       dispatch({
         type: actionTypes.SET_SUGGESTIONS,
         suggestions

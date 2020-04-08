@@ -23,7 +23,7 @@ export class Summary extends Component {
 
     let symptoms = this.props.patient.symptoms;
     res.evidence = _.map(symptoms, (symptom, symptomId) => {
-      const getChoiceId = choice => {
+      const getChoiceId = (choice) => {
         if (choice === true) {
           return 'present';
         }
@@ -57,13 +57,13 @@ export class Summary extends Component {
     return res;
   }
 
-  explainHandler = id => {
+  explainHandler = (id) => {
     const newExplanations = { ...this.state.explanations, [id]: null };
     this.setState({ explanations: newExplanations });
 
     this.context.api
       .explain(Object.assign(this.toDiagnosis(), { target: id }))
-      .then(data => {
+      .then((data) => {
         const exp = { ...this.state.explanation };
         exp[id] = data;
         this.setState({
@@ -74,7 +74,7 @@ export class Summary extends Component {
 
   componentDidMount() {
     // GET results
-    this.context.api.diagnosis(this.toDiagnosis()).then(response => {
+    this.context.api.diagnosis(this.toDiagnosis()).then((response) => {
       this.setState(
         {
           diagnosis: response
@@ -88,7 +88,7 @@ export class Summary extends Component {
   }
 
   toAssessment = () => {
-    const conditions = this.state.diagnosis.conditions.map(condition => {
+    const conditions = this.state.diagnosis.conditions.map((condition) => {
       return {
         name: condition.name,
         probability: condition.probability
@@ -96,13 +96,13 @@ export class Summary extends Component {
     });
 
     const filteredConditions = _.take(conditions, 3);
-    const symptoms = Object.keys(this.props.patient.symptoms).filter(el => {
+    const symptoms = Object.keys(this.props.patient.symptoms).filter((el) => {
       return el[0] === 's';
     });
 
-    this.context.api.getSymptoms().then(response => {
-      const apiSymptoms = symptoms.map(symptom => {
-        const symptomObject = response.find(el => el.id === symptom);
+    this.context.api.getSymptoms().then((response) => {
+      const apiSymptoms = symptoms.map((symptom) => {
+        const symptomObject = response.find((el) => el.id === symptom);
         return {
           name: symptomObject.name,
           reported: this.props.patient.symptoms[symptom].reported
@@ -114,25 +114,25 @@ export class Summary extends Component {
         conditions: filteredConditions,
         symptoms: apiSymptoms
       })
-        .then(response => {
+        .then((response) => {
           const id = response.data.data.assessment.id;
           this.props.setAssessmentId(id);
           console.log(response);
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     });
   };
 
-  getExplanationMarkup = conditionId => {
+  getExplanationMarkup = (conditionId) => {
     let supporting = null;
     let conflicting = null;
     let base = null;
     const explanation = this.state.explanations[conditionId];
     if (explanation) {
       // Build supporting evidence
-      supporting = explanation.supporting_evidence.map(evidence => {
+      supporting = explanation.supporting_evidence.map((evidence) => {
         return (
           <li key={evidence.id}>
             <i className="text-success fa fa-fw fa-plus-circle"></i>
@@ -141,7 +141,7 @@ export class Summary extends Component {
         );
       });
       // Build conflicting evidence
-      conflicting = explanation.conflicting_evidence.map(evidence => {
+      conflicting = explanation.conflicting_evidence.map((evidence) => {
         return (
           <li key={evidence.id}>
             <i className="text-danger fa fa-fw fa-minus-circle"></i>
@@ -176,7 +176,7 @@ export class Summary extends Component {
     if (!this.state.diagnosis) {
       results = <Spinner />;
     } else {
-      results = this.state.diagnosis.conditions.map(condition => {
+      results = this.state.diagnosis.conditions.map((condition) => {
         // Build explanation markup
         let explaination = this.getExplanationMarkup(condition.id);
         return (
@@ -248,9 +248,9 @@ export class Summary extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    patient: state.patient,
+    patient: state.assessment,
     user: state.auth.user
   };
 };

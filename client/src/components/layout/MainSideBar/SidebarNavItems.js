@@ -26,9 +26,9 @@ class SidebarNavItems extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    userType: state.userType
+    userType: state.auth.userType
   };
 };
 

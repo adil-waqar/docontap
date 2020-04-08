@@ -12,11 +12,11 @@ import {
 } from 'shards-react';
 
 export class Basic extends Component {
-  changeSexHandler = sex => {
+  changeSexHandler = (sex) => {
     this.props.onSexChange(sex);
   };
 
-  changeAgeHandler = e => {
+  changeAgeHandler = (e) => {
     this.props.onAgeChange(e.target.value);
   };
 
@@ -65,21 +65,21 @@ export class Basic extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    age: state.patient.age,
-    sex: state.patient.sex
+    age: state.assessment.age,
+    sex: state.assessment.sex
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onSexChange: sex =>
+    onSexChange: (sex) =>
       dispatch({
         type: actionTypes.SET_SEX,
         sex
       }),
-    onAgeChange: age => dispatch({ type: actionTypes.SET_AGE, age })
+    onAgeChange: (age) => dispatch({ type: actionTypes.SET_AGE, age })
   };
 };
 

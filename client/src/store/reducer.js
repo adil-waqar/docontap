@@ -7,12 +7,12 @@ const _store = {
   patient: {
     age: '30',
     sex: 'male',
-    symptoms: {}
+    symptoms: {},
   },
   auth: {
     token: null,
-    user: null
-  }
+    user: null,
+  },
 };
 
 const reducer = (state = _store, action) => {
@@ -39,15 +39,15 @@ const reducer = (state = _store, action) => {
       return onLogout(_store);
     default:
       return {
-        ..._store
+        ..._store,
       };
   }
 };
 
-const toggleSidebar = state => {
+const toggleSidebar = (state) => {
   return {
     ...state,
-    menuVisible: !state.menuVisible
+    menuVisible: !state.menuVisible,
   };
 };
 
@@ -56,8 +56,8 @@ const setAge = (age, state) => {
     ...state,
     patient: {
       ...state.patient,
-      age: age
-    }
+      age: age,
+    },
   };
 };
 
@@ -66,8 +66,8 @@ const setSex = (sex, state) => {
     ...state,
     patient: {
       ...state.patient,
-      sex
-    }
+      sex,
+    },
   };
 };
 
@@ -76,8 +76,8 @@ const setSymptoms = (symptoms, state) => {
     ...state,
     patient: {
       ...state.patient,
-      symptoms: { ...symptoms }
-    }
+      symptoms: { ...symptoms },
+    },
   };
 };
 const setRisks = (risks, state) => {
@@ -85,8 +85,8 @@ const setRisks = (risks, state) => {
     ...state,
     patient: {
       ...state.patient,
-      symptoms: { ...state.patient.symptoms, ...risks }
-    }
+      symptoms: { ...state.patient.symptoms, ...risks },
+    },
   };
 };
 
@@ -97,9 +97,9 @@ const setSuggestions = (suggestions, state) => {
       ...state.patient,
       symptoms: {
         ...state.patient.symptoms,
-        ...suggestions
-      }
-    }
+        ...suggestions,
+      },
+    },
   };
 };
 const setGeoRisks = (georisks, state) => {
@@ -109,9 +109,9 @@ const setGeoRisks = (georisks, state) => {
       ...state.patient,
       symptoms: {
         ...state.patient.symptoms,
-        ...georisks
-      }
-    }
+        ...georisks,
+      },
+    },
   };
 };
 
@@ -122,9 +122,9 @@ const setEvidence = (evidence, state) => {
       ...state.patient,
       symptoms: {
         ...state.patient.symptoms,
-        ...evidence
-      }
-    }
+        ...evidence,
+      },
+    },
   };
 };
 
@@ -137,14 +137,14 @@ const authSuccess = (payload, state) => {
       ...state.auth,
       token: payload.token,
       user: payload.user,
-      logout: false
-    }
+      logout: false,
+    },
   };
 };
 
-const onLogout = initialState => {
+const onLogout = (initialState) => {
   return {
-    ...initialState
+    ...initialState,
   };
 };
 

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { NavLink, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actionTypes from '../store/actions';
 import {
   Card,
   CardBody,
@@ -18,7 +17,7 @@ import {
 import PageTitle from '../components/common/PageTitle';
 import Spinner from '../components/UI/Spinner/Spinner';
 import logo from '../images/logo.png';
-import Axios from '../utils/axios';
+import { auth } from '../store/actions/index';
 
 export class SignIn extends Component {
   state = {
@@ -29,35 +28,16 @@ export class SignIn extends Component {
     success: false
   };
 
-  signInHandler = e => {
+  signInHandler = (e) => {
     e.preventDefault();
-    this.setState({ loading: true });
-    Axios.post('/user/login', {
-      email: this.state.email,
-      password: this.state.password
-    })
-      .then(response => {
-        this.props.onLogin(
-          response.data.data,
-          response.headers['x-auth-token']
-        );
-        // Save token to local storage
-        localStorage.setItem('x-auth-token', response.headers['x-auth-token']);
-        localStorage.setItem('user', JSON.stringify(response.data.data));
-        this.setState({ loading: false, success: true });
-      })
-      .catch(err => {
-        // Give an alert here
-        this.setState({ error: err, loading: false });
-        console.log(err);
-      });
+    this.props.onLogin(this.state.email, this.state.password);
   };
 
-  emailHandler = e => {
+  emailHandler = (e) => {
     this.setState({ email: e.target.value });
   };
 
-  passwordHandler = e => {
+  passwordHandler = (e) => {
     this.setState({ password: e.target.value });
   };
 
@@ -142,20 +122,13 @@ export class SignIn extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onLogin: (user, token) =>
-      dispatch({
-        type: actionTypes.AUTH_SUCCESS,
-        payload: {
-          user,
-          token
-        }
-      })
+    onLogin: (email, password) => dispatch(auth(email, password))
   };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth.user
   };

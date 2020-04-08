@@ -11,11 +11,12 @@ import Axios from './utils/axios';
 export class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem('x-auth-token');
+    if (!token) return;
     Axios.get('/user/auth', { headers: { 'x-auth-token': token } })
-      .then(response => {
+      .then((response) => {
         // Do nothing
       })
-      .catch(err => {
+      .catch((err) => {
         // this.props.onAuthFail(err);
         // this.props.history.push('/signin');
         console.log(err);
@@ -24,7 +25,7 @@ export class App extends Component {
       const user = JSON.parse(localStorage.getItem('user'));
       this.props.onAuthSuccess({
         token,
-        user
+        user,
       });
     } else {
       // Redirect
@@ -56,10 +57,10 @@ export class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onAuthSuccess: payload =>
-      dispatch({ type: actionTypes.AUTH_SUCCESS, payload })
+    onAuthSuccess: (payload) =>
+      dispatch({ type: actionTypes.AUTH_SUCCESS, payload }),
   };
 };
 
