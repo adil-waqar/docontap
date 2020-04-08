@@ -25,18 +25,18 @@ export class Nlp extends Component {
     observations: []
   };
 
-  handleFeelChange = e => {
+  handleFeelChange = (e) => {
     this.context.api
       .parse(e.target.value)
-      .then(response => {
+      .then((response) => {
         this.updateObservations(response.mentions);
       })
-      .catch(err => {
+      .catch((err) => {
         // Will do it later!
       });
   };
 
-  updateObservations = observations => {
+  updateObservations = (observations) => {
     if (!observations) {
       this.setState({
         observations: []
@@ -48,11 +48,11 @@ export class Nlp extends Component {
     });
   };
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     if (_.isEmpty(this.state.observations)) {
       return;
     }
-    const pairs = this.state.observations.map(item => {
+    const pairs = this.state.observations.map((item) => {
       let val = {
         reported: item.choice_id === 'present'
       };
@@ -67,7 +67,7 @@ export class Nlp extends Component {
     this.props.onFinish(o);
   }
 
-  onTextChange = e => {
+  onTextChange = (e) => {
     e.persist();
     this.delayedHandler(e);
   };
@@ -106,9 +106,10 @@ export class Nlp extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onFinish: symptoms => dispatch({ type: actionTypes.SET_SYMPTOMS, symptoms })
+    onFinish: (symptoms) =>
+      dispatch({ type: actionTypes.SET_SYMPTOMS, symptoms })
   };
 };
 
