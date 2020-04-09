@@ -12,25 +12,10 @@ export class PreviousAssessments extends Component {
 
   componentDidMount() {
     Axios.get(`/patient/${this.props.patientId}/assessment`)
-      .then(response => {
+      .then((response) => {
         this.setState({ assessments: response.data.data });
       })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
-  componentDidUpdate() {
-    Axios.get(`/patient/${this.props.patientId}/assessment`)
-      .then(response => {
-        if (
-          JSON.stringify(response.data.data) ===
-          JSON.stringify(this.state.assessments)
-        )
-          return;
-        this.setState({ assessments: response.data.data });
-      })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -38,7 +23,7 @@ export class PreviousAssessments extends Component {
   render() {
     let initialAssessments = null;
     if (this.state.assessments) {
-      initialAssessments = this.state.assessments.map(assessment => {
+      initialAssessments = this.state.assessments.map((assessment) => {
         const conditions = assessment.conditions.sort(
           (a, b) => b.probability - a.probability
         );
@@ -101,7 +86,7 @@ export class PreviousAssessments extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     patientId: state.auth.user ? state.auth.user.id : state.auth.user
   };

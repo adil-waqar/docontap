@@ -18,7 +18,7 @@ export default [
   {
     title: 'Appointments',
     htmlBefore: '<i class="material-icons">local_hospital</i>',
-    to: '/appointments'
+    to: '/patient-appointments'
   },
   {
     title: 'Conditions Library',

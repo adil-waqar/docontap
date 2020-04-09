@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { FormCheckbox } from 'shards-react';
 import { ApiContext } from '../../../ApiContext';
 import Spinner from '../../UI/Spinner/Spinner';
-import * as actionTypes from '../../../store/actions';
+import { setSuggestions } from '../../../store/actions/index';
 
 export class Suggest extends Component {
   static contextType = ApiContext;
@@ -108,10 +108,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onFinish: (suggestions) => {
-      dispatch({
-        type: actionTypes.SET_SUGGESTIONS,
-        suggestions
-      });
+      dispatch(setSuggestions(suggestions));
     }
   };
 };

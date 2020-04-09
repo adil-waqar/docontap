@@ -14,25 +14,24 @@ import {
   Badge
 } from 'shards-react';
 
-export class Appointments extends Component {
+export class PatientAppointments extends Component {
   state = {
     appointments: []
   };
 
   componentDidMount() {
     Axios.get(`/patient/${this.props.patientId}/appointment`)
-      .then(response => {
-        console.log(response);
+      .then((response) => {
         this.setState({ appointments: response.data.data });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
   render() {
     let appointments = null;
     if (this.state.appointments) {
-      appointments = this.state.appointments.map(appointment => {
+      appointments = this.state.appointments.map((appointment) => {
         return (
           <Card key={appointment.id} className="mb-2">
             <CardBody>
@@ -79,10 +78,10 @@ export class Appointments extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    patientId: state.auth.user ? state.auth.user.id : state.auth.user
+    patientId: state.auth.user.id
   };
 };
 
-export default connect(mapStateToProps, null)(Appointments);
+export default connect(mapStateToProps, null)(PatientAppointments);

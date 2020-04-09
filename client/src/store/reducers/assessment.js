@@ -62,7 +62,7 @@ const setSymptoms = (symptoms, state) => {
 const setRisks = (risks, state) => {
   return {
     ...state,
-    symptoms: { ...state.patient.symptoms, ...risks }
+    symptoms: { ...state.symptoms, ...risks }
   };
 };
 
@@ -70,7 +70,7 @@ const setSuggestions = (suggestions, state) => {
   return {
     ...state,
     symptoms: {
-      ...state.patient.symptoms,
+      ...state.symptoms,
       ...suggestions
     }
   };
@@ -79,7 +79,7 @@ const setGeoRisks = (georisks, state) => {
   return {
     ...state,
     symptoms: {
-      ...state.patient.symptoms,
+      ...state.symptoms,
       ...georisks
     }
   };
@@ -89,7 +89,7 @@ const setEvidence = (evidence, state) => {
   return {
     ...state,
     symptoms: {
-      ...state.patient.symptoms,
+      ...state.symptoms,
       ...evidence
     }
   };

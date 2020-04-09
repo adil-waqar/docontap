@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions';
+import { setAge, setSex } from '../../../store/actions/index';
 import {
   CardTitle,
   FormRadio,
@@ -74,12 +74,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSexChange: (sex) =>
-      dispatch({
-        type: actionTypes.SET_SEX,
-        sex
-      }),
-    onAgeChange: (age) => dispatch({ type: actionTypes.SET_AGE, age })
+    onSexChange: (sex) => dispatch(setSex(sex)),
+    onAgeChange: (age) => dispatch(setAge(age))
   };
 };
 

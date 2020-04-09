@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Navbar, NavbarBrand } from 'shards-react';
-import * as actionTypes from '../../../store/actions';
+import * as actionTypes from '../../../store/actions/actionTypes';
 
 class SidebarMainNavbar extends React.Component {
   render() {
@@ -55,7 +55,7 @@ SidebarMainNavbar.defaultProps = {
   hideLogoText: false
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onToggleSidebar: () => dispatch({ type: actionTypes.TOGGLE_SIDEBAR })
   };

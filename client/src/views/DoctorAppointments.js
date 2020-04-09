@@ -23,18 +23,17 @@ export class DoctorAppointments extends PureComponent {
 
   componentDidMount() {
     Axios.get(`/doctor/${this.props.doctorId}/appointment`)
-      .then(response => {
-        console.log(response);
+      .then((response) => {
         this.setState({ appointments: response.data.data });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
 
   componentDidUpdate() {
     Axios.get(`/doctor/${this.props.doctorId}/appointment`)
-      .then(response => {
+      .then((response) => {
         if (
           JSON.stringify(response.data.data) ===
           JSON.stringify(this.state.appointments)
@@ -42,25 +41,25 @@ export class DoctorAppointments extends PureComponent {
           return;
         this.setState({ appointments: [...response.data.data] });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
 
-  checkAssessmentHandler = id => {
+  checkAssessmentHandler = (id) => {
     // Get relevant appointment
     this.setState({
       checkAssessment: id
     });
   };
 
-  getAssessmentMarkup = id => {
-    const appointment = this.state.appointments.find(el => el.id === id);
+  getAssessmentMarkup = (id) => {
+    const appointment = this.state.appointments.find((el) => el.id === id);
     // Build conditions markup
     const conditionsSorted = appointment.assessment.conditions.sort(
       (a, b) => b.probability - a.probability
     );
-    const conditions = conditionsSorted.map(condition => {
+    const conditions = conditionsSorted.map((condition) => {
       return (
         <Card className="mt-3" key={condition.id}>
           <CardBody>
@@ -94,7 +93,7 @@ export class DoctorAppointments extends PureComponent {
       );
     });
 
-    const symptoms = appointment.assessment.symptoms.map(symptom => {
+    const symptoms = appointment.assessment.symptoms.map((symptom) => {
       return (
         <li key={symptom.id}>
           <i
@@ -131,18 +130,17 @@ export class DoctorAppointments extends PureComponent {
     Axios.put(`/appointment/${id}`, {
       status
     })
-      .then(response => {
-        console.log(response);
+      .then((response) => {
         // Get new appointments
         Axios.get(`/doctor/${this.props.doctorId}/appointment`)
-          .then(response => {
+          .then((response) => {
             this.setState({ appointments: response.data.data });
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error);
           });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -150,7 +148,7 @@ export class DoctorAppointments extends PureComponent {
   render() {
     let appointments = null;
     if (this.state.appointments) {
-      appointments = this.state.appointments.map(appointment => {
+      appointments = this.state.appointments.map((appointment) => {
         const assessmentResults = this.getAssessmentMarkup(appointment.id);
         return (
           <Card key={appointment.id} className="mb-2">
@@ -228,7 +226,7 @@ export class DoctorAppointments extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     doctorId: state.auth.user ? state.auth.user.id : state.auth.user
   };

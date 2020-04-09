@@ -117,7 +117,6 @@ export class Summary extends Component {
         .then((response) => {
           const id = response.data.data.assessment.id;
           this.props.setAssessmentId(id);
-          console.log(response);
         })
         .catch((err) => {
           console.log(err);

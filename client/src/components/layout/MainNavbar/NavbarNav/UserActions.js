@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../../store/actions';
+import * as actionTypes from '../../../../store/actions/actionTypes';
 import {
   Dropdown,
   DropdownToggle,
@@ -29,8 +29,6 @@ class UserActions extends Component {
     localStorage.removeItem('user');
     // Remove token from store
     this.props.onLogout();
-    // Redirect to signin
-    // this.props.history.push('/signin');
   };
 
   render() {
@@ -68,13 +66,13 @@ class UserActions extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onLogout: () => dispatch({ type: actionTypes.LOG_OUT })
   };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     user: state.auth.user
   };

@@ -6,7 +6,7 @@ import GroupSingle from './group-single/GroupSingle';
 import GroupMultiple from './group-multiple/GroupMultiple';
 import Single from './single/Single';
 import { CardTitle } from 'shards-react';
-import * as actionTypes from '../../../store/actions';
+import { setEvidence } from '../../../store/actions/index';
 import _ from 'lodash';
 
 export class Question extends Component {
@@ -157,8 +157,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFinish: (evidence) =>
-      dispatch({ type: actionTypes.SET_EVIDENCE, evidence })
+    onFinish: (evidence) => dispatch(setEvidence(evidence))
   };
 };
 

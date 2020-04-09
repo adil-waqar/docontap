@@ -87,14 +87,12 @@ export class Appointment extends Component {
     const time = this.state.radio.selected.from;
     const day = this.state.radio.selected.day;
     const dayTime = day + ' ' + time;
-    console.log(dayTime);
     Axios.post(`/patient/${this.props.patientId}/appointment`, {
       doctorId: this.state.doctor.id,
       time: dayTime,
       assessmentId: this.props.assessmentId
     })
       .then((response) => {
-        console.log(response);
         this.props.history.push('/appointments');
       })
       .catch((error) => {

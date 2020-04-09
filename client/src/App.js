@@ -1,57 +1,64 @@
 import React, { Component } from 'react';
-
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actionTypes from './store/actions';
+import { authCheck } from './store/actions/index';
 import routes from './routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/shards-dashboards.1.1.0.min.css';
-import Axios from './utils/axios';
+import * as CONSTANTS from './utils/constants';
 
 export class App extends Component {
   componentDidMount() {
     const token = localStorage.getItem('x-auth-token');
     if (!token) return;
-    Axios.get('/user/auth', { headers: { 'x-auth-token': token } })
-      .then((response) => {
-        // Do nothing
-      })
-      .catch((err) => {
-        // this.props.onAuthFail(err);
-        // this.props.history.push('/signin');
-        console.log(err);
-      });
-    if (token) {
-      const user = JSON.parse(localStorage.getItem('user'));
-      this.props.onAuthSuccess({
-        token,
-        user,
-      });
-    } else {
-      // Redirect
-      this.props.history.push('/signin');
-    }
+    this.props.onAuthCheckState(token);
   }
 
+  filterRoutes = (routes) => {
+    return routes.filter((route) => {
+      if (route.role === CONSTANTS.OPEN && !this.props.isAuthenticated)
+        return true;
+      else if (route.role === CONSTANTS.BOTH && this.props.isAuthenticated)
+        return true;
+      else if (
+        route.role === CONSTANTS.PATIENT &&
+        this.props.userType === CONSTANTS.PATIENT
+      )
+        return true;
+      else if (
+        route.role === CONSTANTS.DOCTOR &&
+        this.props.userType === CONSTANTS.DOCTOR
+      )
+        return true;
+      else if (route.role === CONSTANTS.ALL) return true;
+      else return false;
+    });
+  };
+
   render() {
+    // Filtering routes
+    const filteredRoutes = this.filterRoutes(routes);
+
     return (
       <div>
-        {routes.map((route, index) => {
-          return (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={() => {
-                return (
-                  <route.layout>
-                    <route.component />
-                  </route.layout>
-                );
-              }}
-            />
-          );
-        })}
+        <Switch>
+          {filteredRoutes.map((route, index) => {
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={() => {
+                  return (
+                    <route.layout>
+                      <route.component />
+                    </route.layout>
+                  );
+                }}
+              />
+            );
+          })}
+        </Switch>
       </div>
     );
   }
@@ -59,9 +66,15 @@ export class App extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuthSuccess: (payload) =>
-      dispatch({ type: actionTypes.AUTH_SUCCESS, payload }),
+    onAuthCheckState: (token) => dispatch(authCheck(token))
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(App));
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+    userType: state.auth.userType
+  };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

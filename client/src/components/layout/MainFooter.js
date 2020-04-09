@@ -7,9 +7,10 @@ const MainFooter = ({ contained, menuItems, copyright }) => (
   <footer
     className="main-footer d-flex p-2 px-3 bg-white border-top"
     style={{
-      position: 'fixed',
+      position: 'absolute',
       bottom: '0',
-      width: '100%'
+      width: '100%',
+      height: '4rem'
     }}
   >
     <Container fluid={contained}>
