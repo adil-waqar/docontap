@@ -36,9 +36,9 @@ MainSidebar.defaultProps = {
   hideLogoText: false
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    menuVisible: state.menuVisible,
+    menuVisible: state.assessment.menuVisible,
     isAuthenticated: state.auth.token !== null
   };
 };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Nav } from 'shards-react';
 import PatientItems from '../../../data/sidebarNavItemsPatient';
 import DoctorItems from '../../../data/sidebarNavItemsDoctor';
-import * as CONSTANTS from '../../../store/constants';
+import * as CONSTANTS from '../../../utils/constants';
 
 import SidebarNavItem from './SidebarNavItem';
 
@@ -26,9 +26,9 @@ class SidebarNavItems extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    userType: state.userType
+    userType: state.auth.userType
   };
 };
 

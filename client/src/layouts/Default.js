@@ -16,10 +16,13 @@ const DefaultLayout = ({ children, noNavbar, noFooter }) => (
         md={{ size: 9, offset: 3 }}
         sm="12"
         tag="main"
+        style={{
+          position: 'relative',
+          minHeight: '100vh'
+        }}
       >
         {!noNavbar && <MainNavbar />}
-        {children}
-        <div style={{ paddingBottom: '4rem' }}></div>
+        <div style={{ paddingBottom: '4rem' }}>{children}</div>
         {!noFooter && <MainFooter />}
       </Col>
     </Row>

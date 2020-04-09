@@ -1,18 +1,10 @@
-import * as actionTypes from './actions';
-import * as CONSTANTS from './constants';
+import * as actionTypes from '../actions/actionTypes';
 
 const _store = {
   menuVisible: false,
-  userType: null,
-  patient: {
-    age: '30',
-    sex: 'male',
-    symptoms: {}
-  },
-  auth: {
-    token: null,
-    user: null
-  }
+  age: '30',
+  sex: 'male',
+  symptoms: {}
 };
 
 const reducer = (state = _store, action) => {
@@ -33,10 +25,6 @@ const reducer = (state = _store, action) => {
       return setGeoRisks(action.georisks, state);
     case actionTypes.SET_EVIDENCE:
       return setEvidence(action.evidence, state);
-    case actionTypes.AUTH_SUCCESS:
-      return authSuccess(action.payload, state);
-    case actionTypes.LOG_OUT:
-      return onLogout(_store);
     default:
       return {
         ..._store
@@ -44,7 +32,7 @@ const reducer = (state = _store, action) => {
   }
 };
 
-const toggleSidebar = state => {
+const toggleSidebar = (state) => {
   return {
     ...state,
     menuVisible: !state.menuVisible
@@ -54,63 +42,45 @@ const toggleSidebar = state => {
 const setAge = (age, state) => {
   return {
     ...state,
-    patient: {
-      ...state.patient,
-      age: age
-    }
+    age
   };
 };
 
 const setSex = (sex, state) => {
   return {
     ...state,
-    patient: {
-      ...state.patient,
-      sex
-    }
+    sex
   };
 };
 
 const setSymptoms = (symptoms, state) => {
   return {
     ...state,
-    patient: {
-      ...state.patient,
-      symptoms: { ...symptoms }
-    }
+    symptoms: { ...symptoms }
   };
 };
 const setRisks = (risks, state) => {
   return {
     ...state,
-    patient: {
-      ...state.patient,
-      symptoms: { ...state.patient.symptoms, ...risks }
-    }
+    symptoms: { ...state.symptoms, ...risks }
   };
 };
 
 const setSuggestions = (suggestions, state) => {
   return {
     ...state,
-    patient: {
-      ...state.patient,
-      symptoms: {
-        ...state.patient.symptoms,
-        ...suggestions
-      }
+    symptoms: {
+      ...state.symptoms,
+      ...suggestions
     }
   };
 };
 const setGeoRisks = (georisks, state) => {
   return {
     ...state,
-    patient: {
-      ...state.patient,
-      symptoms: {
-        ...state.patient.symptoms,
-        ...georisks
-      }
+    symptoms: {
+      ...state.symptoms,
+      ...georisks
     }
   };
 };
@@ -118,33 +88,10 @@ const setGeoRisks = (georisks, state) => {
 const setEvidence = (evidence, state) => {
   return {
     ...state,
-    patient: {
-      ...state.patient,
-      symptoms: {
-        ...state.patient.symptoms,
-        ...evidence
-      }
+    symptoms: {
+      ...state.symptoms,
+      ...evidence
     }
-  };
-};
-
-const authSuccess = (payload, state) => {
-  return {
-    ...state,
-    userType:
-      payload.user.user.userType === '1' ? CONSTANTS.PATIENT : CONSTANTS.DOCTOR,
-    auth: {
-      ...state.auth,
-      token: payload.token,
-      user: payload.user,
-      logout: false
-    }
-  };
-};
-
-const onLogout = initialState => {
-  return {
-    ...initialState
   };
 };
 

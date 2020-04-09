@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../../store/actions';
+import * as actionTypes from '../../../store/actions/actionTypes';
 
 class NavbarToggle extends Component {
   render() {
@@ -18,7 +18,7 @@ class NavbarToggle extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onToggleSidebar: () => dispatch({ type: actionTypes.TOGGLE_SIDEBAR })
   };

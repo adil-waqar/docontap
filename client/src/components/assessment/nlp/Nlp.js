@@ -11,7 +11,7 @@ import {
 } from 'shards-react';
 
 import { ApiContext } from '../../../ApiContext';
-import * as actionTypes from '../../../store/actions';
+import { setSymptoms } from '../../../store/actions/index';
 
 export class Nlp extends Component {
   static contextType = ApiContext;
@@ -108,8 +108,7 @@ export class Nlp extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFinish: (symptoms) =>
-      dispatch({ type: actionTypes.SET_SYMPTOMS, symptoms })
+    onFinish: (symptoms) => dispatch(setSymptoms(symptoms))
   };
 };
 

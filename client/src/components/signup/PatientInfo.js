@@ -10,7 +10,7 @@ export class PatientInfo extends Component {
     finish: false
   };
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value
@@ -22,11 +22,10 @@ export class PatientInfo extends Component {
       location: this.state.location,
       phone: this.state.phone
     })
-      .then(response => {
+      .then((response) => {
         this.setState({ finish: true });
-        console.log(response);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };

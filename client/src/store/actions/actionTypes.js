@@ -7,6 +7,7 @@ export const SET_SUGGESTIONS = 'SET_SUGGESTIONS';
 export const SET_GEORISKS = 'SET_GEORISKS';
 export const SET_EVIDENCE = 'SET_EVIDENCE';
 
+export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 

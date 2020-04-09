@@ -13,7 +13,7 @@ export class DoctorInfo extends Component {
     finish: false
   };
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     e.preventDefault();
     this.setState({
       [e.target.name]: e.target.value
@@ -21,7 +21,6 @@ export class DoctorInfo extends Component {
   };
 
   handleDoctorInfo = () => {
-    console.log('Handle doctor info');
     Axios.post(`/user/${this.props.userId}/doctor`, {
       fee: this.state.fee,
       hospital: this.state.hospital,
@@ -29,11 +28,10 @@ export class DoctorInfo extends Component {
       specialization: this.state.specialization,
       location: this.state.location
     })
-      .then(response => {
+      .then((response) => {
         this.setState({ finish: true });
-        console.log(response);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };

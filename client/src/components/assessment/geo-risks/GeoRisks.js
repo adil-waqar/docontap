@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Spinner from '../../UI/Spinner/Spinner';
 import { ApiContext } from '../../../ApiContext';
 import { FormCheckbox } from 'shards-react';
-import * as actionTypes from '../../../store/actions';
+import { setGeoRisks } from '../../../store/actions/index';
 import { connect } from 'react-redux';
 
 export class GeoRisks extends Component {
@@ -26,14 +26,14 @@ export class GeoRisks extends Component {
   };
 
   componentDidMount() {
-    this.context.api.getRiskFactors().then(response => {
+    this.context.api.getRiskFactors().then((response) => {
       this.setState({
         geoRiskData: response
       });
     });
 
-    this.state.geoRisks.forEach(geoRisk => {
-      this.setState(prevState => {
+    this.state.geoRisks.forEach((geoRisk) => {
+      this.setState((prevState) => {
         return {
           checked: {
             ...prevState.checked,
@@ -56,7 +56,7 @@ export class GeoRisks extends Component {
     this.props.onFinish(group);
   }
 
-  onChangeHandler = id => {
+  onChangeHandler = (id) => {
     const checkedSymptoms = { ...this.state.checked };
     for (let symptom in checkedSymptoms) {
       if (symptom === id) {
@@ -71,10 +71,10 @@ export class GeoRisks extends Component {
   render() {
     let data = null;
     if (this.state.geoRiskData.length > 0) {
-      const filteredRisks = this.state.geoRiskData.filter(risk => {
+      const filteredRisks = this.state.geoRiskData.filter((risk) => {
         return this.state.geoRisks.indexOf(risk.id) >= 0;
       });
-      data = filteredRisks.map(risks => {
+      data = filteredRisks.map((risks) => {
         return (
           <FormCheckbox
             key={risks.id}
@@ -97,9 +97,9 @@ export class GeoRisks extends Component {
     );
   }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onFinish: georisks => dispatch({ type: actionTypes.SET_GEORISKS, georisks })
+    onFinish: (georisks) => dispatch(setGeoRisks(georisks))
   };
 };
 
