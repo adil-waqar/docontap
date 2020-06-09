@@ -112,7 +112,7 @@ export class Question extends Component {
         case 'single':
           options = (
             <Single
-              key="secret-key-2"
+              key='secret-key-2'
               items={items}
               handleNextQuestion={this.handleNextQuestion}
             />
@@ -121,7 +121,7 @@ export class Question extends Component {
         case 'group_single':
           options = (
             <GroupSingle
-              key="secret-key-2"
+              key='secret-key-2'
               items={items}
               handleNextQuestion={this.handleNextQuestion}
             />
@@ -130,7 +130,7 @@ export class Question extends Component {
         case 'group_multiple':
           options = (
             <GroupMultiple
-              key="secret-key-2"
+              key='secret-key-2'
               items={items}
               handleNextQuestion={this.handleNextQuestion}
             />
@@ -140,7 +140,7 @@ export class Question extends Component {
           options = null;
       }
       fullQuestion = [
-        <CardTitle key="secret-key-1">{text}</CardTitle>,
+        <CardTitle key='secret-key-1'>{text}</CardTitle>,
         options
       ];
     } else fullQuestion = <Spinner />;

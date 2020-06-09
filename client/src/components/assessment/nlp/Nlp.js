@@ -48,7 +48,7 @@ export class Nlp extends Component {
     });
   };
 
-  UNSAFE_componentWillUnmount() {
+  componentWillUnmount() {
     if (_.isEmpty(this.state.observations)) {
       return;
     }
@@ -94,10 +94,10 @@ export class Nlp extends Component {
       <div>
         <CardTitle>Tell us how you feel below</CardTitle>
         <p>We will try out best to recognize your symptoms.</p>
-        <FormTextarea onChange={this.onTextChange} className="mb-2" />
+        <FormTextarea onChange={this.onTextChange} className='mb-2' />
         <p>Identified observations:</p>
         <Row>
-          <Col lg="6" md="8" sm="12">
+          <Col lg='6' md='8' sm='12'>
             <ListGroup small>{observations}</ListGroup>
           </Col>
         </Row>

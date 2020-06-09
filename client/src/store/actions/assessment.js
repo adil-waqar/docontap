@@ -15,6 +15,7 @@ export const setAge = (age) => {
 };
 
 export const setSymptoms = (symptoms) => {
+  console.log(symptoms);
   return { type: actionTypes.SET_SYMPTOMS, symptoms };
 };
 
